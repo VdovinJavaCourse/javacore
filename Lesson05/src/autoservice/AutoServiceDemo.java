@@ -2,19 +2,23 @@ package autoservice;
 
 import autoservice.common.solutions.dataclasses.Pair;
 import autoservice.mark.domain.Mark;
-import autoservice.mark.service.MarkMemoryService;
+import autoservice.mark.repo.impl.MarkMemoryArrayRepo;
+import autoservice.mark.service.impl.MarkDefaultService;
 import autoservice.model.domain.Model;
-import autoservice.model.service.ModelMemoryService;
-import autoservice.order.service.OrderMemoryService;
+import autoservice.model.repo.impl.ModelMemoryArrayRepo;
+import autoservice.model.service.impl.ModelDefaultService;
+import autoservice.order.repo.impl.OrderMemoryArrayRepo;
+import autoservice.order.service.impl.OrderDefaultService;
 import autoservice.user.domain.User;
-import autoservice.user.service.UserMemoryService;
+import autoservice.user.repo.impl.UserMemoryArrayRepo;
+import autoservice.user.service.impl.UserDefaultService;
 
 public class AutoServiceDemo {
     private static class Application {
-        private UserMemoryService userService = new UserMemoryService();
-        private MarkMemoryService markService = new MarkMemoryService();
-        private ModelMemoryService modelService = new ModelMemoryService();
-        private OrderMemoryService orderService = new OrderMemoryService();
+        private UserDefaultService userService = new UserDefaultService(new UserMemoryArrayRepo() );
+        private MarkDefaultService markService = new MarkDefaultService(new MarkMemoryArrayRepo(),new ModelMemoryArrayRepo());
+        private ModelDefaultService modelService = new ModelDefaultService(new ModelMemoryArrayRepo());
+        private OrderDefaultService orderService = new OrderDefaultService(new OrderMemoryArrayRepo());
 
         private void addUsers() {
             String[] usersAsCsv = new String[]{
@@ -30,7 +34,7 @@ public class AutoServiceDemo {
             for (String csvUser : usersAsCsv) {
                 String[] userAttrs = csvUser.split("\\|");
                 int attrIndex = -1;
-                userService.addUser(new User(++id,
+                userService.add(new User(++id,
                         userAttrs[++attrIndex].trim(),
                         userAttrs[++attrIndex].trim(),
                         Integer.parseInt(userAttrs[++attrIndex].trim())
@@ -87,7 +91,7 @@ public class AutoServiceDemo {
                 mark.getModels()[i] = model;
             }
 
-            markService.addMark(mark);
+            markService.add(mark);
         }
 
         public void fillStorage() {
@@ -96,25 +100,25 @@ public class AutoServiceDemo {
         }
 
         public void printUsers() {
-            userService.printUsers();
+            userService.printAll();
         }
 
         public void printMarks() {
-            markService.printMarks();
+            markService.printAll();
         }
 
         public void deleteUsers(){
 
-            userService.deleteUser(1L);
-            userService.deleteUser(2L);
-            userService.deleteUser(3L);
-            userService.deleteUser(4L);
-            userService.deleteUser(5L);
-            userService.deleteUser(6L);
-            userService.deleteUser(7L);
+            userService.deleteById(1L);
+            userService.deleteById(2L);
+            userService.deleteById(3L);
+            userService.deleteById(4L);
+            userService.deleteById(5L);
+            userService.deleteById(6L);
+            userService.deleteById(7L);
 
-            userService.addUser(new User(33L, "SSSS","AAAA",333));
-            userService.deleteUser(33L);
+            userService.add(new User(33L, "SSSS","AAAA",333));
+            userService.deleteById(33L);
         }
 
     }

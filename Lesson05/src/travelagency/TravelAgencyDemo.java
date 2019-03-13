@@ -1,21 +1,26 @@
 package travelagency;
 
 import travelagency.city.domain.City;
-import travelagency.city.service.CityMemoryService;
+import travelagency.city.repo.impl.CityMemoryArrayRepo;
+import travelagency.city.service.impl.CityDefaultService;
 import travelagency.common.solutions.dataclasses.Pair;
 import travelagency.country.domain.Country;
-import travelagency.country.service.CountryMemoryService;
-import travelagency.order.service.OrderMemoryService;
+import travelagency.country.repo.impl.CountryMemoryArrayRepo;
+import travelagency.country.service.impl.CountryDefaultService;
+import travelagency.order.repo.impl.OrderMemoryArrayRepo;
+import travelagency.order.service.impl.OrderDefaultService;
 import travelagency.user.domain.User;
-import travelagency.user.service.UserMemoryService;
+import travelagency.user.repo.UserRepo;
+import travelagency.user.repo.impl.UserMemoryArrayRepo;
+import travelagency.user.service.impl.UserDefaultService;
 
 public class TravelAgencyDemo {
 
     private static class Application {
-        private UserMemoryService userService = new UserMemoryService();
-        private CountryMemoryService countryService = new CountryMemoryService();
-        private CityMemoryService cityService = new CityMemoryService();
-        private OrderMemoryService orderService = new OrderMemoryService();
+        private UserDefaultService userService = new UserDefaultService(new UserMemoryArrayRepo());
+        private CountryDefaultService countryService = new CountryDefaultService(new CountryMemoryArrayRepo(),new CityMemoryArrayRepo());
+        private CityDefaultService cityService = new CityDefaultService(new CityMemoryArrayRepo());
+        private OrderDefaultService orderService = new OrderDefaultService(new OrderMemoryArrayRepo());
 
         private void addUsers() {
             String[] usersAsCsv = new String[]{
@@ -34,7 +39,7 @@ public class TravelAgencyDemo {
             for (String user : usersAsCsv) {
                 String[] userAttrs = user.split("\\|");
                 int attrIndex = -1;
-                userService.addUser(new User(++id,
+                userService.add(new User(++id,
                         userAttrs[++attrIndex].trim(),
                         userAttrs[++attrIndex].trim(),
                         Integer.parseInt(userAttrs[++attrIndex].trim())));
@@ -97,7 +102,7 @@ public class TravelAgencyDemo {
                 country.getCities()[i] = city;
             }
 
-            countryService.addCountry(country);
+            countryService.add(country);
         }
 
         public void fillStorage() {
@@ -106,16 +111,16 @@ public class TravelAgencyDemo {
         }
 
         public void printUsers() {
-            userService.printUsers();
+            userService.printAll();
         }
 
         public void printCountries() {
-            countryService.printCountries();
+            countryService.printAll();
         }
 
         public void deleteUsers() {
-            userService.deleteUser(2L);
-            userService.deleteUser(3L);
+            userService.deleteById(2L);
+            userService.deleteById(3L);
         }
 
 
