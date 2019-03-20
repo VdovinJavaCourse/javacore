@@ -3,17 +3,15 @@
         <name>Russia</name>
         <language>Russian</language>
         <cities>
-            <city discriminator="HOT">
+            <city discriminator="HOT" isCapital="N">
                 <name>Sochi</name>
                 <population>500000</population>
-                <isCapital>no</isCapital>
                 <averageTemperature>35.2</averageTemperature>
                 <hottestMonth>July</hottestMonth>
             </city>
-            <city discriminator="COLD">
+            <city discriminator="COLD" isCapital="N">
                 <name>Murmansk</name>
                 <population>300000</population>
-                <isCapital>no</isCapital>
                 <averageTemperature>-29.5</averageTemperature>
                 <coldestMonth>Feb</coldestMonth>
                 <polarNights>yes</polarNights>
@@ -24,10 +22,9 @@
         <name>USA</name>
         <language>English</language>
         <cities>
-            <city discriminator="HOT">
+            <city discriminator="HOT" isCapital="N">
                 <name>LA</name>
                 <population>1000000</population>
-                <isCapital>no</isCapital>
                 <averageTemperature>26.4</averageTemperature>
                 <hottestMonth>August</hottestMonth>
             </city>

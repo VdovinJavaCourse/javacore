@@ -79,7 +79,7 @@ public class DomXmlParser implements XmlParser<List<Country>> {
                                 City city = country.getCities().get(country.getCities().size() - 1);
                                 city.setName(xmlCity.getElementsByTagName("name").item(0).getTextContent());
                                 city.setPopulation(Integer.parseInt(xmlCity.getElementsByTagName("population").item(0).getTextContent()));
-                                city.setCapital(new String("capital").equals(xmlCity.getElementsByTagName("isCapital").item(0).getTextContent()));
+                                city.setCapital("Y".equals(xmlCity.getAttribute("isCapital")));
 
 
                             }
