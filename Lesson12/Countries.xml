@@ -1,0 +1,36 @@
+<countries>
+    <country>
+        <name>Russia</name>
+        <language>Russian</language>
+        <cities>
+            <city discriminator="HOT">
+                <name>Sochi</name>
+                <population>500000</population>
+                <isCapital>no</isCapital>
+                <averageTemperature>35.2</averageTemperature>
+                <hottestMonth>July</hottestMonth>
+            </city>
+            <city discriminator="COLD">
+                <name>Murmansk</name>
+                <population>300000</population>
+                <isCapital>no</isCapital>
+                <averageTemperature>-29.5</averageTemperature>
+                <coldestMonth>Feb</coldestMonth>
+                <polarNights>yes</polarNights>
+            </city>
+        </cities>
+    </country>
+    <country>
+        <name>USA</name>
+        <language>English</language>
+        <cities>
+            <city discriminator="HOT">
+                <name>LA</name>
+                <population>1000000</population>
+                <isCapital>no</isCapital>
+                <averageTemperature>26.4</averageTemperature>
+                <hottestMonth>August</hottestMonth>
+            </city>
+        </cities>
+    </country>
+</countries>

@@ -1,0 +1,16 @@
+<countries>
+    <country>
+        <name></name>
+        <language></language>
+        <cities>
+            <city>
+                <discriminator></discriminator>
+                <name></name>
+                <population></population>
+                <isCapital></isCapital>
+                <month></month>
+                <averageTemperature></averageTemperature>
+            </city>
+        </cities>
+    </country>
+</countries>
